@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính tiền ngày Tết</title>
+    <style>
+        body{
+            background-color: black;
+            color: azure;
+            margin: 0;
+        }
+        .name_box{
+            width: 300px;
+            height: 100px;
+            margin: 20px auto;
+            background-color: rgb(46, 55, 95);
+
+        }
+        .name{
+            
+            text-align: center;
+            padding: 20px 0;
+        }
+        .flex{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: rgb(87, 48, 20);
+        }
+        .button{
+            background-color: rgb(27, 42, 12);
+            padding: 10px 20px;
+        }
+        .button:hover{
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Tính tiền ngày Tết</h1>
+    <div id="main">
+        <div class="form">
+            <input type="text" id="newName" placeholder="New player">
+            <button onclick="addPerson()">SUBMIT</button>
+            <button onclick="render()">START GAME</button>
+        </div>
+        <!-- <div class="name_box">
+            <div class="name">KHANG</div>
+            <div class="flex">
+                <div class="button" onclick="plus()">-</div>
+                <div style="align-items: center; padding: 10px;">+5</div>
+                <div class="button" onclick="minus()">+</div>
+            </div>
+        </div> -->
+    </div>
+</body>
+<script>
+    let soTienDat = 0;
+
+    let player = [{
+        name:'KHANG',
+        money: 0
+    }];
+    //   template
+    
+    function render(){
+        document.getElementById('main').innerHTML ='';
+        for(let a=0;a<player.length;a++){
+            document.getElementById('main').innerHTML += `
+            <div class="name_box">
+            <div class="name">`+player[a].name+`</div>
+            <div class="flex">
+                <div class="button" onclick="minus(`+a+`)">-</div>
+                <div style="align-items: center; padding: 10px;">`+player[a].money+`</div>
+                <div class="button" onclick="plus(`+a+`)">+</div>
+            </div>
+            </div>
+            `
+        }
+    }
+    function addPerson(){
+        player.push({
+            name: document.getElementById('newName').value,
+            money: 0
+        })
+        document.getElementById('newName').value = '';
+    }
+    function plus(id){
+        player[id].money++;
+        render();
+    }
+    function minus(id){
+        player[id].money--;
+        render();
+    }
+</script>
+</html>
